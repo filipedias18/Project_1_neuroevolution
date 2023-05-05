@@ -1,5 +1,5 @@
-from Node import Node
-from SimpleThresholdClassifier import SimpleThresholdClassifier
+from .Node import Node
+from .SimpleThresholdClassifier import SimpleThresholdClassifier
 
 import pandas as pd
 
