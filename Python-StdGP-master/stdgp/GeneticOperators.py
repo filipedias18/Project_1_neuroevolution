@@ -9,7 +9,8 @@ from .Node import Node
 #
 # Copyright ©2019-2022 J. E. Batista
 #
-def double_tournament(tournament_size, parsimony_tournament_size, population, n, fitness_first=True):
+def double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+                      fitness_first):
     if fitness_first:
         if tournament_size >= parsimony_tournament_size:
             tournament_order = ['fitness', 'size']
@@ -25,20 +26,20 @@ def double_tournament(tournament_size, parsimony_tournament_size, population, n,
     for current_tournament in tournament_order:
         # Select contestants for the current tournament
         if current_tournament == 'fitness':
-            contestants = [tournament(random, population, n) for i in range(
+            contestants = [tournament(rng, population, tournament_size) for i in range(
                 tournament_size)]  # n is the number of individuals from the population that will go to the tournament
             # print(contestants)
         else:
-            contestants = [size_tournament(random, population, n) for i in range(
+            contestants = [size_tournament(rng, population, tournament_size) for i in range(
                 tournament_size)]
             # Run the tournament and get the winner
         if current_tournament == 'fitness':
-            winner = [tournament(random, contestants, n) for i in range(parsimony_tournament_size)]
+            winner = [tournament(rng, contestants, tournament_size) for i in range(parsimony_tournament_size)]
         else:
-            winner = [size_tournament(random, contestants, n) for i in range(parsimony_tournament_size)]
+            winner = [size_tournament(rng, contestants, tournament_size) for i in range(parsimony_tournament_size)]
 
     # Return the winner of the final tournament
-    return winner
+    return winner[0]
 
 
 def size_tournament(rng, population, n):
@@ -49,8 +50,8 @@ def size_tournament(rng, population, n):
     Parameters:
     population (list): A list of Individuals.
     '''
-    candidates = [rng.choice(population) for i in range(n)]
-    return min(candidates, key=lambda x: x.get_size())
+    candidates = [rng.randint(0, len(population) - 1) for i in range(n)]
+    return population[min(candidates)]
 
 
 def tournament(rng, population, n):
@@ -105,7 +106,7 @@ def discardDeep(population, limit):
     return ret
 
 
-def STXO(rng, population, tournament_size):
+def STXO(rng, population, tournament_size, parsimony_tournament_size=5, fitness_first=True):
     '''
 	Randomly selects one node from each of two individuals; swaps the node and
 	sub-nodes; and returns the two new Individuals as the offspring.
@@ -113,8 +114,10 @@ def STXO(rng, population, tournament_size):
 	Parameters:
 	population (list): A list of Individuals, sorted from best to worse.
 	'''
-    ind1 = tournament(rng, population, tournament_size)
-    ind2 = tournament(rng, population, tournament_size)
+    ind1 = double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+                             fitness_first)  # double_tournament(rng,tournament_size, parsimony_tournament_size, population, n, fitness_first)
+    ind2 = double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+                             fitness_first)
 
     h1 = ind1.getHead()
     h2 = ind2.getHead()
@@ -132,7 +135,7 @@ def STXO(rng, population, tournament_size):
     return ret
 
 
-def STMUT(rng, population, tournament_size):
+def STMUT(rng, population, tournament_size, parsimony_tournament_size=5, fitness_first=True):
     '''
 	Randomly selects one node from a single individual; swaps the node with a 
 	new, node generated using Grow; and returns the new Individual as the offspring.
@@ -140,7 +143,8 @@ def STMUT(rng, population, tournament_size):
 	Parameters:
 	population (list): A list of Individuals, sorted from best to worse.
 	'''
-    ind1 = tournament(rng, population, tournament_size)
+    ind1 = double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+                             fitness_first)
     h1 = ind1.getHead()
     n1 = h1.getRandomNode(rng)
     n = Node()
