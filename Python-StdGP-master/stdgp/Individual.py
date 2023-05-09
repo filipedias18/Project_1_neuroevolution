@@ -47,8 +47,6 @@ class Individual:
 	def copy(self, head):
 		self.head = head
 
-
-
 	def __gt__(self, other):
 		sf = self.getFitness()
 		ss = self.getSize()

@@ -9,7 +9,7 @@ from .Node import Node
 #
 # Copyright ©2019-2022 J. E. Batista
 #
-def double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+def double_tournament(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments,
                       fitness_first):
     if fitness_first:
         if tournament_size >= parsimony_tournament_size:
@@ -22,24 +22,19 @@ def double_tournament(rng, population, tournament_size, parsimony_tournament_siz
         else:
             print("The tournament size must be smaller or equal than the parsimony size.")
 
-    # Run the tournaments in order
-    for current_tournament in tournament_order:
-        # Select contestants for the current tournament
-        if current_tournament == 'fitness':
-            contestants = [tournament(rng, population, tournament_size) for i in range(
-                tournament_size)]  # n is the number of individuals from the population that will go to the tournament
-            # print(contestants)
-        else:
-            contestants = [size_tournament(rng, population, tournament_size) for i in range(
-                tournament_size)]
-            # Run the tournament and get the winner
-        if current_tournament == 'fitness':
-            winner = [tournament(rng, contestants, tournament_size) for i in range(parsimony_tournament_size)]
-        else:
-            winner = [size_tournament(rng, contestants, tournament_size) for i in range(parsimony_tournament_size)]
+    # Select contestants for the current tournament
+    if tournament_order[0] == 'fitness':
+        contestants = [tournament(rng, population, tournament_size) for i in range(number_of_tournaments)]
+    else:
+        contestants = [size_tournament(rng, population, tournament_size) for i in range(number_of_tournaments)]
+
+    if tournament_order[1] == 'fitness':
+        winner = tournament(rng, contestants, parsimony_tournament_size)
+    else:
+        winner = size_tournament(rng, contestants, parsimony_tournament_size)
 
     # Return the winner of the final tournament
-    return winner[0]
+    return winner
 
 
 def size_tournament(rng, population, n):
@@ -51,7 +46,7 @@ def size_tournament(rng, population, n):
     population (list): A list of Individuals.
     '''
     candidates = [rng.randint(0, len(population) - 1) for i in range(n)]
-    return population[min(candidates)]
+    return min([population[candidate] for candidate in candidates], key=lambda x: x.getSize())
 
 
 def tournament(rng, population, n):
@@ -76,7 +71,7 @@ def getElite(population, n):
     return population[:n]
 
 
-def getOffspring(rng, population, tournament_size):
+def getOffspring(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments, fitness_first=True):
     '''
 	Genetic Operator: Selects a genetic operator and returns a list with the 
 	offspring Individuals. The crossover GOs return two Individuals and the
@@ -91,9 +86,9 @@ def getOffspring(rng, population, tournament_size):
     desc = None
 
     if isCross:
-        desc = STXO(rng, population, tournament_size)
+        desc = STXO(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments, fitness_first=True)
     else:
-        desc = STMUT(rng, population, tournament_size)
+        desc = STMUT(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments, fitness_first=True)
 
     return desc
 
@@ -106,7 +101,7 @@ def discardDeep(population, limit):
     return ret
 
 
-def STXO(rng, population, tournament_size, parsimony_tournament_size=5, fitness_first=True):
+def STXO(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments, fitness_first=True):
     '''
 	Randomly selects one node from each of two individuals; swaps the node and
 	sub-nodes; and returns the two new Individuals as the offspring.
@@ -114,9 +109,9 @@ def STXO(rng, population, tournament_size, parsimony_tournament_size=5, fitness_
 	Parameters:
 	population (list): A list of Individuals, sorted from best to worse.
 	'''
-    ind1 = double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+    ind1 = double_tournament(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments,
                              fitness_first)  # double_tournament(rng,tournament_size, parsimony_tournament_size, population, n, fitness_first)
-    ind2 = double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+    ind2 = double_tournament(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments,
                              fitness_first)
 
     h1 = ind1.getHead()
@@ -135,7 +130,7 @@ def STXO(rng, population, tournament_size, parsimony_tournament_size=5, fitness_
     return ret
 
 
-def STMUT(rng, population, tournament_size, parsimony_tournament_size=5, fitness_first=True):
+def STMUT(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments, fitness_first=True):
     '''
 	Randomly selects one node from a single individual; swaps the node with a 
 	new, node generated using Grow; and returns the new Individual as the offspring.
@@ -143,7 +138,7 @@ def STMUT(rng, population, tournament_size, parsimony_tournament_size=5, fitness
 	Parameters:
 	population (list): A list of Individuals, sorted from best to worse.
 	'''
-    ind1 = double_tournament(rng, population, tournament_size, parsimony_tournament_size,
+    ind1 = double_tournament(rng, population, tournament_size, parsimony_tournament_size, number_of_tournaments,
                              fitness_first)
     h1 = ind1.getHead()
     n1 = h1.getRandomNode(rng)

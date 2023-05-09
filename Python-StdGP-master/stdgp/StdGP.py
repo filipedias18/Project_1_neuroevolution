@@ -37,6 +37,9 @@ class StdGP:
 	max_depth = None
 	max_generation = None
 	tournament_size = None
+	parsimony_tournament_size = None
+	number_of_tournaments = None
+	fitness_first = None
 	elitism_size = None
 
 	model_name = None 
@@ -72,7 +75,7 @@ class StdGP:
 
 
 	def __init__(self, operators=[("+",2),("-",2),("*",2),("/",2)], max_initial_depth = 6, population_size = 500, 
-		max_generation = 100, tournament_size = 5, elitism_size = 1, max_depth = 17, 
+		max_generation = 100, tournament_size = 5, parsimony_tournament_size = 3, number_of_tournaments = 10, fitness_first=True, elitism_size = 1, max_depth = 17,
 		threads=1, random_state = 42, verbose = True, model_name="SimpleThresholdClassifier", fitnessType="Accuracy"):
 
 		if sum( [0 if op in [("+",2),("-",2),("*",2),("/",2)] else 0 for op in operators ] ) > 0:
@@ -89,6 +92,9 @@ class StdGP:
 		self.max_depth = max_depth
 		self.max_generation = max_generation
 		self.tournament_size = tournament_size
+		self.parsimony_tournament_size = parsimony_tournament_size
+		self.number_of_tournaments = number_of_tournaments
+		self.fitness_first = fitness_first
 		self.elitism_size = elitism_size
 
 		self.model_name = model_name
@@ -313,7 +319,7 @@ class StdGP:
 		newPopulation = []
 		newPopulation.extend(getElite(self.population, self.elitism_size))
 		while len(newPopulation) < self.population_size:
-			offspring = getOffspring(self.rng, self.population, self.tournament_size)
+			offspring = getOffspring(self.rng, self.population, self.tournament_size, self.parsimony_tournament_size, self.number_of_tournaments, self.fitness_first)
 			offspring = discardDeep(offspring, self.max_depth)
 			newPopulation.extend(offspring)
 		self.population = newPopulation[:self.population_size]

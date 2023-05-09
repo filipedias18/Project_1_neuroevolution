@@ -19,16 +19,20 @@ OPERATORS = [("+",2),("-",2),("*",2),("/",2)] # Default
 MAX_DEPTH = 6
 
 # Number of models in the population
-POPULATION_SIZE = 500
+POPULATION_SIZE = 100
 
 # Maximum number of iterations
-MAX_GENERATION = 100
+MAX_GENERATION = 50
 
 # Fraction of the dataset to be used as training (used by Main_M3GP_standalone.py)
 TRAIN_FRACTION = 0.70
 
 # Number of individuals to be used in the tournament
 TOURNAMENT_SIZE = 5
+
+PARSIMONY_TOURNAMENT_SIZE = 3
+NUMBER_OF_TOURNAMENTS = 10
+FITNESS_FIRST=True
 
 # Number of best individuals to be automatically moved to the next generation
 ELITISM_SIZE = 1
@@ -40,7 +44,7 @@ SHUFFLE = True
 LIMIT_DEPTH=17
 
 # Number of runs (used by Main_M3GP_standalone.py)
-RUNS = 30
+RUNS = 1
 
 # Verbose
 VERBOSE = True
