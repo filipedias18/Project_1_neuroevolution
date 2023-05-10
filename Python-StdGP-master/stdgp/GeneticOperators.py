@@ -15,14 +15,16 @@ def double_tournament(rng, population, tournament_size, parsimony_tournament_siz
         if tournament_size >= parsimony_tournament_size:
             tournament_order = ['fitness', 'size']
         else:
-            print("The parsimony size must be smaller or equal than the tournament size.")
+            print("The parsimony size must be smaller or equal than the number of tournaments.")
+
     else:
         if tournament_size <= parsimony_tournament_size:
             tournament_order = ['size', 'fitness']
         else:
-            print("The tournament size must be smaller or equal than the parsimony size.")
+            print("The number of tournament must be smaller or equal than the parsimony size.")
 
-    # Select contestants for the current tournament
+
+    # See which type of tournament will be performed first
     if tournament_order[0] == 'fitness':
         contestants = [tournament(rng, population, tournament_size) for i in range(number_of_tournaments)]
     else:
