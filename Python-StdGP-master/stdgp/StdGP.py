@@ -36,9 +36,9 @@ class StdGP:
 
 	max_depth = None
 	max_generation = None
-	tournament_size = None
+	fitness_tournament_size = None
 	parsimony_tournament_size = None
-	number_of_tournaments = None
+	number_of_individuals = None
 	fitness_first = None
 	elitism_size = None
 
@@ -75,7 +75,7 @@ class StdGP:
 
 
 	def __init__(self, operators=[("+",2),("-",2),("*",2),("/",2)], max_initial_depth = 6, population_size = 500, 
-		max_generation = 100, tournament_size = 5, parsimony_tournament_size = 3, number_of_tournaments = 10, fitness_first=True, elitism_size = 1, max_depth = 17,
+		max_generation = 100, fitness_tournament_size = 5, parsimony_tournament_size = 3, number_of_individuals = 10, fitness_first=True, elitism_size = 1, max_depth = 17,
 		threads=1, random_state = 42, verbose = True, model_name="SimpleThresholdClassifier", fitnessType="Accuracy"):
 
 		if sum( [0 if op in [("+",2),("-",2),("*",2),("/",2)] else 0 for op in operators ] ) > 0:
@@ -91,9 +91,9 @@ class StdGP:
 
 		self.max_depth = max_depth
 		self.max_generation = max_generation
-		self.tournament_size = tournament_size
+		self.fitness_tournament_size = fitness_tournament_size
 		self.parsimony_tournament_size = parsimony_tournament_size
-		self.number_of_tournaments = number_of_tournaments
+		self.number_of_individuals = number_of_individuals
 		self.fitness_first = fitness_first
 		self.elitism_size = elitism_size
 
@@ -189,7 +189,7 @@ class StdGP:
 			print("    > Operators:          "+str(self.operators))
 			print("    > Population Size:    "+str(self.population_size))
 			print("    > Max Generation:     "+str(self.max_generation))
-			print("    > Tournament Size:    "+str(self.tournament_size))
+			print("    > Tournament Size:    "+str(self.fitness_tournament_size))
 			print("    > Elitism Size:       "+str(self.elitism_size))
 			print("    > Max Initial Depth:  "+str(self.max_initial_depth))
 			print("    > Max Depth:          "+str(self.max_depth))
@@ -319,7 +319,7 @@ class StdGP:
 		newPopulation = []
 		newPopulation.extend(getElite(self.population, self.elitism_size))
 		while len(newPopulation) < self.population_size:
-			offspring = getOffspring(self.rng, self.population, self.tournament_size, self.parsimony_tournament_size, self.number_of_tournaments, self.fitness_first)
+			offspring = getOffspring(self.rng, self.population, self.fitness_tournament_size, self.parsimony_tournament_size, self.number_of_individuals, self.fitness_first)
 			offspring = discardDeep(offspring, self.max_depth)
 			newPopulation.extend(offspring)
 		self.population = newPopulation[:self.population_size]

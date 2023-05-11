@@ -48,8 +48,8 @@ def run(r,dataset):
 	Tr_X, Te_X, Tr_Y, Te_Y = openAndSplitDatasets(dataset,r)
 
 	# Train a model
-	model = StdGP(OPERATORS, MAX_DEPTH, POPULATION_SIZE, MAX_GENERATION, TOURNAMENT_SIZE,
-				  PARSIMONY_TOURNAMENT_SIZE, NUMBER_OF_TOURNAMENTS, FITNESS_FIRST,
+	model = StdGP(OPERATORS, MAX_DEPTH, POPULATION_SIZE, MAX_GENERATION, FITNESS_TOURNAMENT_SIZE,
+				  PARSIMONY_TOURNAMENT_SIZE, number_of_individuals, FITNESS_FIRST,
 		ELITISM_SIZE, LIMIT_DEPTH, THREADS, r, VERBOSE, MODEL_NAME, FITNESS_TYPE)
 	model.fit(Tr_X, Tr_Y, Te_X, Te_Y)
 
@@ -139,7 +139,7 @@ def call_StdGP():
 				file.write("\nMax Initial Depth,"+str(MAX_DEPTH))
 				file.write("\nPopulation Size,"+str(POPULATION_SIZE))
 				file.write("\nMax Generation,"+str(MAX_GENERATION))
-				file.write("\nTournament Size,"+str(TOURNAMENT_SIZE))
+				file.write("\nTournament Size,"+str(FITNESS_TOURNAMENT_SIZE))
 				file.write("\nElitism Size,"+str(ELITISM_SIZE))
 				file.write("\nDepth Limit,"+str(LIMIT_DEPTH))
 				file.write("\nWrapped Model,"+MODEL_NAME)

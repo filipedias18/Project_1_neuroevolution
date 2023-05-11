@@ -28,10 +28,10 @@ MAX_GENERATION = 50
 TRAIN_FRACTION = 0.70
 
 # Number of individuals to be used in the tournament
-TOURNAMENT_SIZE = 5
+FITNESS_TOURNAMENT_SIZE = 3
 
-PARSIMONY_TOURNAMENT_SIZE = 3
-NUMBER_OF_TOURNAMENTS = 10
+PARSIMONY_TOURNAMENT_SIZE = 5
+number_of_individuals = 10
 FITNESS_FIRST=True
 
 # Number of best individuals to be automatically moved to the next generation
@@ -103,7 +103,7 @@ if "-tf" in argv:
 	TRAIN_FRACTION = float(argv[argv.index("-tf")+1])
 
 if "-ts" in argv:
-	TOURNAMENT_SIZE = int(argv[argv.index("-ts")+1])
+	FITNESS_TOURNAMENT_SIZE = int(argv[argv.index("-ts")+1])
 
 if "-es" in argv:
 	ELITISM_SIZE = int(argv[argv.index("-es")+1])

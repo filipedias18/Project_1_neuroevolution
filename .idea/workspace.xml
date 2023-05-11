@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ad7a4dd-14de-4d28-b8a5-dcd1a01b0519" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python-StdGP-master/Main_StdGP_classification_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python-StdGP-master/Main_StdGP_classification_example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python-StdGP-master/Arguments.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python-StdGP-master/Arguments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python-StdGP-master/Main_StdGP_standalone.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python-StdGP-master/Main_StdGP_standalone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python-StdGP-master/stdgp/GeneticOperators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python-StdGP-master/stdgp/GeneticOperators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python-StdGP-master/stdgp/Individual.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python-StdGP-master/stdgp/Individual.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python-StdGP-master/stdgp/StdGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python-StdGP-master/stdgp/StdGP.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,14 +27,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/filip/OneDrive/Ambiente de Trabalho/Projects/Faculdade/Mestrado/2º Semestre/Neuroevolution/Project_neuro1"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/filip/OneDrive/Ambiente de Trabalho/Projects/Faculdade/Mestrado/2º Semestre/Neuroevolution/Project_neuro1&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Python.Main_StdGP_classification_example (1)">
+}</component>
+  <component name="RunManager" selected="Python.Main_StdGP_standalone">
     <configuration name="Main_StdGP_classification_example (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Project_neuro1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,8 +77,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Main_StdGP_standalone" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Project1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\manue\anaconda3\python.exe" />
+      <option name="SDK_NAME" value="C:\Users\manue\anaconda3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Python-StdGP-master" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python-StdGP-master/Main_StdGP_standalone.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Main_StdGP_standalone" />
         <item itemvalue="Python.Main_StdGP_classification_example (1)" />
         <item itemvalue="Python.Main_StdGP_classification_example" />
       </list>
@@ -95,5 +117,16 @@
       <updated>1683295849224</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Python-StdGP-master/stdgp/GeneticOperators.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
