@@ -12,7 +12,7 @@ import sys
 #
 def double_tournament(rng, population, fitness_tournament_size, parsimony_tournament_size, number_of_individuals,
                       fitness_first):
-    if fitness_first:
+    if fitness_first: #boolean flag, if true the fitness tournament is the first one
         if fitness_tournament_size >= parsimony_tournament_size:
             tournament_order = ['fitness', 'size']
         else:
@@ -27,25 +27,25 @@ def double_tournament(rng, population, fitness_tournament_size, parsimony_tourna
             sys.exit()  # end the program in case this condition verifies
 
 
-    # See which type of tournament will be performed first
+    # seeing which type of tournament will be performed first
     if tournament_order[0] == 'fitness':
         contestants = [tournament(rng, population, number_of_individuals) for i in range(fitness_tournament_size)]
     else:
         contestants = [size_tournament(rng, population, number_of_individuals) for i in range(parsimony_tournament_size)]
-
+    # after getting the contestants (winners of the 1st tournament), move on to the second
     if tournament_order[1] == 'fitness':
         winner = tournament(rng, contestants, fitness_tournament_size)
     else:
         winner = size_tournament(rng, contestants, parsimony_tournament_size)
 
-    # Return the winner of the final tournament
+    # returning the winner of the final tournament
     return winner
 
 
 def size_tournament(rng, population, n):
     '''
     Selects "n" Individuals from the population based on their size
-    and returns a single Individual.
+    and returns the smallest Individual.
 
     Parameters:
     population (list): A list of Individuals.
@@ -56,8 +56,7 @@ def size_tournament(rng, population, n):
 
 def tournament(rng, population, n):
     '''
-	Selects "n" Individuals from the population and return a 
-	single Individual.
+	Selects "n" Individuals from the population and returns the one with highest fitness
 
 	Parameters:
 	population (list): A list of Individuals, sorted from best to worse.
