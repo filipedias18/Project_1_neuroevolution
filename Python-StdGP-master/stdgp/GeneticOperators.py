@@ -34,9 +34,9 @@ def double_tournament(rng, population, fitness_tournament_size, parsimony_tourna
         contestants = [size_tournament(rng, population, number_of_individuals) for i in range(parsimony_tournament_size)]
 
     if tournament_order[1] == 'fitness':
-        winner = tournament(rng, contestants, parsimony_tournament_size)
+        winner = tournament(rng, contestants, fitness_tournament_size)
     else:
-        winner = size_tournament(rng, contestants, fitness_tournament_size)
+        winner = size_tournament(rng, contestants, parsimony_tournament_size)
 
     # Return the winner of the final tournament
     return winner

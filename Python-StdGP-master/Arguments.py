@@ -32,7 +32,7 @@ FITNESS_TOURNAMENT_SIZE = 3
 
 PARSIMONY_TOURNAMENT_SIZE = 5
 number_of_individuals = 10
-FITNESS_FIRST=True
+FITNESS_FIRST=False
 
 # Number of best individuals to be automatically moved to the next generation
 ELITISM_SIZE = 1
